@@ -3,11 +3,11 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 13:46
-# Last modified: 2016-11-27 18:06
+# Last modified: 2016-11-27 18:07
 # Filename: views.py
 # Description:
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from authentication.forms import LoginForm
 
@@ -31,3 +31,8 @@ def login_view(request):
             context['errors'] = 'Invalid User'
         context['login_form'] = login_form
         return render(request, 'authentication/login.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('authentication.login')

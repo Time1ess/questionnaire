@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-26 13:44
-# Last modified: 2016-11-27 18:05
+# Last modified: 2016-11-27 18:08
 # Filename: urls.py
 # Description:
 """questionnaire URL Configuration
@@ -28,6 +28,7 @@ from authentication import views
 
 urlpatterns = [
     url(r'^login', views.login_view, name='authentication.login'),
+    url(r'^logout', views.logout_view, name='authentication.logout'),
 ]
 
 
