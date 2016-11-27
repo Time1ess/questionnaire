@@ -9,7 +9,7 @@ class Province(models.Model):
     
     class Meta:
         verbose_name = u"省份"
-        verbose_plure_name = u"省份"
+        verbose_name_plural = u"省份"
     def __unicode__(self):
         return "%s" % self.name
 
@@ -19,7 +19,7 @@ class School(models.Model):
     
     class Meta:
         verbose_name = u"院校"
-        verbose_plure_name = u"院校"
+        verbose_name_plural = u"院校"
     def __unicode__(self):
         return "%s" % self.name
 
@@ -29,7 +29,7 @@ class QuestionItem(models.Model):
 
     class Meta:
         verbose_name = u"问题项"
-        verbose_plure_name = u"问题项"
+        verbose_name_plural = u"问题项"
     def __unicode__(self):
         return "%s" % self.text
 
@@ -41,7 +41,7 @@ class AnswerSheet(models.Model):
 
     class Meta:
         verbose_name = u"问卷"
-        verbose_plure_name = u"问卷"
+        verbose_name_plural = u"问卷"
     def __unicode__(self):
         return "%s %d" % (self.school.name, self.year)
 
@@ -54,6 +54,6 @@ class AnswerItem(models.Model):
 
     class Meta:
         verbose_name = u"回答项"
-        verbose_plure_name = u"回答项"
+        verbose_name_plural = u"回答项"
     def __unicode__(self):
         return "%s:%s" % (self.question_item.text, self.number)
