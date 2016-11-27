@@ -32,10 +32,19 @@ class School(models.Model):
     def __unicode__(self):
         return "%s" % self.name
 
+class QuestionSheet(models.Model):
+    category = models.IntegerField()
+
+    class Meta:
+        verbose_name = u"问卷"
+        verbose_name_plural = u"问卷"
+
+    def __unicode__(self):
+        return "%s" % self.id
 
 class QuestionItem(models.Model):
     text = models.CharField(max_length=200)
-    index = models.IntegerField(unique=True)
+    index = models.IntegerField()
 
     class Meta:
         verbose_name = u"问题项"
