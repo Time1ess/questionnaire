@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-26 13:44
-# Last modified: 2016-11-27 17:17
+# Last modified: 2016-11-27 22:11
 # Filename: urls.py
 # Description:
 """questionnaire URL Configuration
@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^school/', include('school.urls')),
     url(r'^auth/', include('authentication.urls')),
     url(r'^captcha/', include('captcha.urls')),
+    url(r'', include('authentication.urls')),
 ]
 
 
