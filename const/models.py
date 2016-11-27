@@ -10,7 +10,6 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
-
 class Province(models.Model):
     name = models.CharField(max_length=50)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -24,7 +23,7 @@ class Province(models.Model):
 
 
 class School(models.Model):
-    province = models.ForeignField(Province)
+    province = models.ForeignKey(Province)
     name = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -37,15 +36,17 @@ class School(models.Model):
 
 class QuestionSheet(models.Model):
     category = models.IntegerField()
+    name = models.CharField(max_length=100)
 
     class Meta:
         verbose_name = u"问卷"
         verbose_name_plural = u"问卷"
 
     def __unicode__(self):
-        return "%s" % self.id
+        return "%s" % self.name
 
 class QuestionItem(models.Model):
+    question_sheet = models.ForeignKey(QuestionSheet)
     text = models.CharField(max_length=200)
     index = models.IntegerField()
 
@@ -58,7 +59,7 @@ class QuestionItem(models.Model):
 
 
 class AnswerSheet(models.Model):
-    school = models.ForeignField(School)
+    school = models.ForeignKey(School)
     year = models.IntegerField()
     finished = models.BooleanField(default=False)  # 是否确认提交
     complete_cnt = models.IntegerField(default=0)  # 未完成的项数
@@ -72,8 +73,8 @@ class AnswerSheet(models.Model):
 
 
 class AnswerItem(models.Model):
-    question_item = models.ForeignField(QuestionItem)
-    answer_sheet = models.ForeignField(AnswerSheet)
+    question_item = models.ForeignKey(QuestionItem)
+    answer_sheet = models.ForeignKey(AnswerSheet)
     number = models.IntegerField(default=0)
     path = models.CharField(max_length=200, blank=True, null=True)
     complete = models.BooleanField(default=False)  # 是否完成过
