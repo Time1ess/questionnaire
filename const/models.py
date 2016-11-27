@@ -3,15 +3,17 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 09:58
-# Last modified: 2016-11-27 10:02
+# Last modified: 2016-11-27 10:21
 # Filename: models.py
 # Description:
 from __future__ import unicode_literals
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Province(models.Model):
     name = models.CharField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = u"省份"
@@ -24,6 +26,7 @@ class Province(models.Model):
 class School(models.Model):
     province = models.ForeignField(Province)
     name = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = u"院校"
