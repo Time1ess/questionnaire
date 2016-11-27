@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿{% load bootstrap %}
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
@@ -22,7 +23,7 @@
 <body>
     {% block content %}
     {% endblock %}
-    {% block js %}
+    {% block base_js %}
 <!-- JS Scripts-->
 <!-- jQuery Js -->
 <script src="/static/js/jquery-1.10.2.js"></script>
@@ -40,6 +41,8 @@
 </script>
 <!-- Custom Js -->
 <script src="/static/js/custom-scripts.js"></script>
+{% endblock %}
+{% block custom_js %}
 {% endblock %}
 </body>
 </html>
