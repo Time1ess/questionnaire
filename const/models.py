@@ -10,6 +10,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+from const import SHEET_CATEGORY
+
 class Province(models.Model):
     name = models.CharField(max_length=50)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -35,7 +37,7 @@ class School(models.Model):
         return "%s" % self.name
 
 class QuestionSheet(models.Model):
-    category = models.IntegerField()
+    category = models.CharField(max_length=20, choices=SHEET_CATEGORY, default="0", blank=True)
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -65,8 +67,8 @@ class AnswerSheet(models.Model):
     complete_cnt = models.IntegerField(default=0)  # 未完成的项数
 
     class Meta:
-        verbose_name = u"问卷"
-        verbose_name_plural = u"问卷"
+        verbose_name = u"答卷"
+        verbose_name_plural = u"答卷"
 
     def __unicode__(self):
         return "%s %d" % (self.school.name, self.year)
