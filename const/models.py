@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 09:58
-# Last modified: 2016-11-29 18:01
+# Last modified: 2016-11-29 18:46
 # Filename: models.py
 # Description:
 from __future__ import unicode_literals
@@ -57,6 +57,7 @@ class QuestionItem(models.Model):
     question_sheet = models.ForeignKey(QuestionSheet)
     text = models.CharField(max_length=200)
     text_for_manager = models.CharField(max_length=200)
+    boolean_input = models.BooleanField()
     index = models.IntegerField()
 
     class Meta:

@@ -1,0 +1,51 @@
+<form id="answer_sheet" sheet_id="{{a_sheet.id}}" action="{% url 'manager.question_table' %}" method="POST" enctype="multipart/form-data">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <td colspan="4" style="text-align:left">请省级用户填写</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in a_items %}
+            <tr>
+                <td class="col-sm-1">{{item.question_item.index}}</td>
+                <td class="col-sm-5">{{item.question_item.text}}</td>
+                <td class="col-sm-3">
+                    {% if finished %}
+                    {{item.value}}
+                    {% else %}
+                    {% if item.question_item.boolean_input %}
+                    <input type="checkbox" item_id="{{item.id}}" class="form-control" {% if item.value  == '1' %}checked="checked"{% endif %}>
+                    <input type="hidden" id="answer_{{item.id}}" name="answer_{{item.id}}" value="1">
+                    {% else %}
+                    <input type="text" class="form-control" name="answer_{{item.id}}" value="{{item.value}}">
+                    {% endif %}
+                    {% endif %}
+                </td>
+                <td class="col-sm-3">
+                    {% if item.path %}
+                    <div id="status_{{item.id}}" class="input-group has-success">
+                        <div class="input-group-addon">覆盖已上传文件:</div>
+                    {% else %}
+                    <div id="status_{{item.id}}" class="input-group has-warning">
+                        <div class="input-group-addon">上传文件:</div>
+                    {% endif %}
+                    {% if not finished %}
+                            <input class="form-control file_upload" style="float:right" type="file" name="file_{{item.id}}">
+                    {% endif %}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            {% include 'manager/school_table.html' %}
+        </tbody>
+    </table>
+    {% if not finished %}
+    <button type="button" class="btn btn-info save_answer">保存</button>
+    <button type="button" class="btn btn-success confirm_answer">确认无误，提交</button>
+    {% else %}
+    <div class="alert alert-danger">问卷已提交，无法修改！</div>
+    {% endif %}
+</form>
+

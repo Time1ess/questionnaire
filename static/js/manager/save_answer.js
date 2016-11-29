@@ -76,3 +76,11 @@ function reload(data)
     else
         alert('提交失败，请重新提交');
 }
+
+$(':checkbox').on('change', function(){
+    var answer = $('#answer_'+$(this).attr('item_id'));
+    if($(this).is(':checked'))
+        answer.attr('value', 1);
+    else
+        answer.attr('value', 0);
+});

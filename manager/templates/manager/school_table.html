@@ -1,0 +1,12 @@
+{% if school_data %}
+<tr>
+    <td class="col-sm-12" colspan="4" style="text-align:left">学校数据汇总:</td>
+</tr>
+{% for ques, val in school_data %}
+<tr>
+    <td>{{ques.index}}</td>
+    <td>{{ques.text_for_manager}}</td>
+    <td colspan="2" style="text-align:center">{{val}}</td>
+</tr>
+{% endfor %}
+{% endif %}
