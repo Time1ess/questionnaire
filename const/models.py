@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 09:58
-# Last modified: 2016-11-29 15:21
+# Last modified: 2016-11-29 18:01
 # Filename: models.py
 # Description:
 from __future__ import unicode_literals
@@ -56,6 +56,7 @@ class QuestionItem(models.Model):
     id = models.CharField(max_length=40, default=uuid4, primary_key=True)
     question_sheet = models.ForeignKey(QuestionSheet)
     text = models.CharField(max_length=200)
+    text_for_manager = models.CharField(max_length=200)
     index = models.IntegerField()
 
     class Meta:
@@ -70,7 +71,6 @@ class AnswerSheet(models.Model):
     id = models.CharField(max_length=40, default=uuid4, primary_key=True)
     user = models.ForeignKey(User, default=None)
     finished = models.BooleanField(default=False)  # 是否确认提交
-    complete_cnt = models.IntegerField(default=0)  # 未完成的项数
     question_sheet = models.ForeignKey(QuestionSheet, on_delete=models.CASCADE,
                                        default=None)
 
@@ -88,7 +88,6 @@ class AnswerItem(models.Model):
     answer_sheet = models.ForeignKey(AnswerSheet)
     value = models.CharField(max_length=100, default="")
     path = models.CharField(max_length=200, default="")
-    complete = models.BooleanField(default=False)  # 是否完成过
 
     class Meta:
         verbose_name = u"回答项"
