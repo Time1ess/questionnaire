@@ -9,6 +9,9 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+PROVINCE_USER = u"省级管理员"
+SCHOOL_USER = u"校级管理员"
+
 PROVINCE_SHEET = "0"
 SCHOOL_SHEET = "1"
 
