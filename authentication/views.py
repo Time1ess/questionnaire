@@ -3,13 +3,15 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 13:46
-# Last modified: 2016-11-27 18:07
+# Last modified: 2016-11-29 10:12
 # Filename: views.py
 # Description:
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
 from authentication.forms import LoginForm
+
+from const import PROVINCE_USER, SCHOOL_USER
 
 
 def login_view(request):
@@ -27,8 +29,15 @@ def login_view(request):
             user = authenticate(**cd)
             if user is not None:
                 login(request, user)
-                return redirect('school.question_table')
-            context['errors'] = 'Invalid User'
+                group = user.groups.all()
+                if group.filter(PROVINCE_USER).count():
+                    return redirect('manager.question_table')
+                elif group.filter(SCHOOL_USER).count():
+                    return redirect('school.question_table')
+                else:
+                    context['errors'] = 'Invalid role'
+            else:
+                context['errors'] = 'Invalid User'
         context['login_form'] = login_form
         return render(request, 'authentication/login.html', context)
 
