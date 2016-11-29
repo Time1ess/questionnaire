@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-29 09:30
-# Last modified: 2016-11-29 11:13
+# Last modified: 2016-11-29 11:32
 # Filename: views.py
 # Description:
 from django.shortcuts import render
