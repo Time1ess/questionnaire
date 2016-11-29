@@ -78,8 +78,8 @@ class AnswerSheet(models.Model):
 class AnswerItem(models.Model):
     question_item = models.ForeignKey(QuestionItem)
     answer_sheet = models.ForeignKey(AnswerSheet)
-    number = models.IntegerField(default=0)
-    path = models.CharField(max_length=200, blank=True, null=True)
+    value = models.CharField(default="")
+    path = models.CharField(max_length=200, default="")
     complete = models.BooleanField(default=False)  # 是否完成过
 
     class Meta:
