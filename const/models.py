@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 09:58
-# Last modified: 2016-11-29 10:01
+# Last modified: 2016-11-29 11:13
 # Filename: models.py
 # Description:
 from __future__ import unicode_literals
@@ -61,7 +61,7 @@ class QuestionItem(models.Model):
 
 
 class AnswerSheet(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, default=None)
     finished = models.BooleanField(default=False)  # 是否确认提交
     complete_cnt = models.IntegerField(default=0)  # 未完成的项数
     question_sheet = models.ForeignKey(QuestionSheet, on_delete=models.CASCADE,

@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 13:46
-# Last modified: 2016-11-29 10:12
+# Last modified: 2016-11-29 10:22
 # Filename: views.py
 # Description:
 from django.shortcuts import render, redirect
@@ -30,9 +30,9 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 group = user.groups.all()
-                if group.filter(PROVINCE_USER).count():
+                if group.filter(name=PROVINCE_USER).count():
                     return redirect('manager.question_table')
-                elif group.filter(SCHOOL_USER).count():
+                elif group.filter(name=SCHOOL_USER).count():
                     return redirect('school.question_table')
                 else:
                     context['errors'] = 'Invalid role'
