@@ -3,14 +3,14 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 09:58
-# Last modified: 2016-11-29 09:23
+# Last modified: 2016-11-29 09:58
 # Filename: models.py
 # Description:
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
-from const import SHEET_CATEGORY
+from const import SHEET_CATEGORY, SCHOOL_SHEET
 
 class Province(models.Model):
     name = models.CharField(max_length=50)
@@ -37,7 +37,7 @@ class School(models.Model):
         return "%s" % self.name
 
 class QuestionSheet(models.Model):
-    category = models.CharField(max_length=20, choices=SHEET_CATEGORY, default="0", blank=True)
+    category = models.CharField(max_length=20, choices=SHEET_CATEGORY)
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -65,6 +65,8 @@ class AnswerSheet(models.Model):
     year = models.IntegerField()
     finished = models.BooleanField(default=False)  # 是否确认提交
     complete_cnt = models.IntegerField(default=0)  # 未完成的项数
+    question_sheet = models.ForeignKey(QuestionSheet, on_delete=models.CASCADE,
+                                       default=None)
 
     class Meta:
         verbose_name = u"答卷"
