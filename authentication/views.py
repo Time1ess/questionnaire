@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 13:46
-# Last modified: 2016-11-29 10:22
+# Last modified: 2016-11-29 15:45
 # Filename: views.py
 # Description:
 from django.shortcuts import render, redirect
@@ -16,6 +16,13 @@ from const import PROVINCE_USER, SCHOOL_USER
 
 def login_view(request):
     context = {}
+    if request.user:
+        user = request.user
+        group = user.groups.all()
+        if group.filter(name=PROVINCE_USER).count():
+            return redirect('manager.question_table')
+        elif group.filter(name=SCHOOL_USER).count():
+            return redirect('school.question_table')
     if request.method == 'GET':
         login_form = LoginForm()
         context['login_form'] = login_form
