@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-27 09:58
-# Last modified: 2016-11-29 11:32
+# Last modified: 2016-11-29 15:21
 # Filename: models.py
 # Description:
 from __future__ import unicode_literals
@@ -79,7 +79,7 @@ class AnswerSheet(models.Model):
         verbose_name_plural = u"答卷"
 
     def __unicode__(self):
-        return "%s %d" % (self.school.name, self.year)
+        return "%s" % self.user.username
 
 
 class AnswerItem(models.Model):
@@ -95,4 +95,4 @@ class AnswerItem(models.Model):
         verbose_name_plural = u"回答项"
 
     def __unicode__(self):
-        return "%s:%s" % (self.question_item.text, self.number)
+        return "%s:%s" % (self.question_item.text, self.answer_sheet)

@@ -3,7 +3,7 @@
 # Author: David
 # Email: youchen.du@gmail.com
 # Created: 2016-11-26 13:50
-# Last modified: 2016-11-27 19:35
+# Last modified: 2016-11-29 14:22
 # Filename: settings.py
 # Description:
 """
@@ -19,6 +19,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -146,3 +147,14 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_URL = '/auth/login'
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+
+
+# Log settings
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
+    datefmt='%m %d %Y %H:%M:%S',
+    filename='system.log',
+    filemode='ab')
+
