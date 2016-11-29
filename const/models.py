@@ -10,9 +10,12 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+from uuid import uuid4
+
 from const import SHEET_CATEGORY, SCHOOL_SHEET
 
 class Province(models.Model):
+    id = models.CharField(max_length=40, default=uuid4, primary_key=True)
     name = models.CharField(max_length=50)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -25,6 +28,7 @@ class Province(models.Model):
 
 
 class School(models.Model):
+    id = models.CharField(max_length=40, default=uuid4, primary_key=True)
     province = models.ForeignKey(Province)
     name = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -37,6 +41,7 @@ class School(models.Model):
         return "%s" % self.name
 
 class QuestionSheet(models.Model):
+    id = models.CharField(max_length=40, default=uuid4, primary_key=True)
     category = models.CharField(max_length=20, choices=SHEET_CATEGORY)
     name = models.CharField(max_length=100)
 
@@ -48,6 +53,7 @@ class QuestionSheet(models.Model):
         return "%s" % self.name
 
 class QuestionItem(models.Model):
+    id = models.CharField(max_length=40, default=uuid4, primary_key=True)
     question_sheet = models.ForeignKey(QuestionSheet)
     text = models.CharField(max_length=200)
     index = models.IntegerField()
@@ -61,6 +67,7 @@ class QuestionItem(models.Model):
 
 
 class AnswerSheet(models.Model):
+    id = models.CharField(max_length=40, default=uuid4, primary_key=True)
     user = models.ForeignKey(User, default=None)
     finished = models.BooleanField(default=False)  # 是否确认提交
     complete_cnt = models.IntegerField(default=0)  # 未完成的项数
@@ -76,6 +83,7 @@ class AnswerSheet(models.Model):
 
 
 class AnswerItem(models.Model):
+    id = models.CharField(max_length=40, default=uuid4, primary_key=True)
     question_item = models.ForeignKey(QuestionItem)
     answer_sheet = models.ForeignKey(AnswerSheet)
     value = models.CharField(max_length=100, default="")
