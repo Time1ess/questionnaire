@@ -78,7 +78,7 @@ class AnswerSheet(models.Model):
 class AnswerItem(models.Model):
     question_item = models.ForeignKey(QuestionItem)
     answer_sheet = models.ForeignKey(AnswerSheet)
-    value = models.CharField(default="")
+    value = models.CharField(max_length=100, default="")
     path = models.CharField(max_length=200, default="")
     complete = models.BooleanField(default=False)  # 是否完成过
 
