@@ -61,8 +61,7 @@ class QuestionItem(models.Model):
 
 
 class AnswerSheet(models.Model):
-    school = models.ForeignKey(School)
-    year = models.IntegerField()
+    user = models.ForeignKey(User)
     finished = models.BooleanField(default=False)  # 是否确认提交
     complete_cnt = models.IntegerField(default=0)  # 未完成的项数
     question_sheet = models.ForeignKey(QuestionSheet, on_delete=models.CASCADE,
