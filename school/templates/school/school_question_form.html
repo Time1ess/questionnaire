@@ -1,26 +1,40 @@
-<form action="#" method="POST" id="school_sheet">
+<form action="#" method="POST" id="school_sheet" sheet_id={{a_sheet.id}}>
     <table class="table table-striped table-bordered table-hover">
         <tbody>
-            {% for a_item in a_items %}
+            {% for item in a_items %}
             <tr>
-                <td class="col-sm-1">{{a_item.question_item.index}}</td>
-                <td class="col-sm-5">{{a_item.question_item.text}}</td>
-                {% if a_item.question_item.boolean_input %}
-                    <td class="col-sm-1"><input type="checkbox" name="val-for-hashname" {% if a_item.value %}checked="checked>"{%endif%}></td>
+                <td class="col-sm-1">{{item.question_item.index}}</td>
+                <td class="col-sm-5">{{item.question_item.text}}</td>
+                {% if finished %}
+                {{item.value}}
+                {% endif %}
+                {% if item.question_item.boolean_input %}
+                <td class="col-sm-1"><input type="checkbox" item_id="{{item.id}}" {% if item.value == '1' %}checked="checked"{%endif%}></td>
+                <input type="hidden" id="answer_{{item.id}}" name="answer_{{item.id}}" value="1">
                 {% else %}
-                    <td class="col-sm-1"><input type="text" class="form-control" {% if a_item.value %}value={{a_item.value}} {%endif%}></td>
+                <td class="col-sm-1"><input type="text" class="form-control" name="answer_{{item.id}}" {% if item.value %}value={{item.value}} {%endif%}></td>
                 {% endif %}
                 <td class="col-sm-5">
-                {% if a_item.path %}
-                    <span class="label label-success">文件已上传</span> 覆盖:<input style="float:right" type="file" name="file-for-hashname">
+                {% if item.path %}
+                    <div id="status_{{item.id}}" class="input-group has-success">
+                        <div class="input-group-addon">覆盖已上传文件:</div>
                 {% else %}
-                    <span class="label label-warning">文件未上传</span> 上传:<input style="float:right" type="file" name="file-for-hashname">
+                    <div id="status_{{item.id}}" class="input-group has-warning">
+                        <div class="input-group-addon">上传文件:</div>
                 {% endif %}
+                    {% if not finished %}
+                        <input class="form-control file_upload" style="float:right" type="file" name="file_{{item.id}}">
+                    {% endif %}
+                    </div>
                 </td>
             </tr>
             {%endfor%}
         </tbody>
     </table>
-    <button type="button" class="btn btn-info">保存</button>
-    <button type="button" class="btn btn-success">确认无误，提交</button>
+    {% if not finished %}
+    <button type="button" class="btn btn-info save_answer">保存</button>
+    <button type="button" class="btn btn-success confirm_answer">确认无误，提交</button>
+    {% else %}
+    <div class="alert alert-danger">问卷已提交，无法修改！</div>
+    {% endif %}
 </form>

@@ -18,6 +18,7 @@ def question_table_view(request):
     a_sheet, _ = AnswerSheet.objects.get_or_create(user=request.user,
                                                 question_sheet=q_sheet)
 
+    finished = a_sheet.finished
 
     q_items = q_sheet.questionitem_set.all()
     for q_item in q_items:
@@ -27,6 +28,8 @@ def question_table_view(request):
     a_items = a_sheet.answeritem_set.all().select_related('question_item').order_by('question_item__index')
 
     context = {
-        "a_items": a_items
+        "a_items": a_items,
+        "a_sheet": a_sheet,
+        "finished": finished
     }
     return render(request, 'school/question_table.html', context)

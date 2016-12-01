@@ -9,7 +9,10 @@
 from django.conf.urls import url
 
 from school import views
+from school import ajax
 
 urlpatterns = [
     url(r'^$', views.question_table_view, name="school.question_table"),
+    url(r'answer_save$', ajax.answer_save, name="school.answer_save"),
+    url(r'answer_confirm$', ajax.answer_confirm, name="school.answer_confirm")
 ]
