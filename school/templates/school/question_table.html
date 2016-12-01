@@ -41,30 +41,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <form action="#" method="POST">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td class="col-sm-1">1</td>
-                                            <td class="col-sm-5">为学生指定创新创业能力培养计划，建立创新创业档案和成绩单</td>
-                                            <td class="col-sm-1"><input type="checkbox" name="val-for-hashname"> 是</td>
-                                            <td class="col-sm-5">
-                                                <span class="label label-success">文件已上传</span> 覆盖:<input style="float:right" type="file" name="file-for-hashname">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-1">1</td>
-                                            <td class="col-sm-5">建设的大学科技园、大学生创业园、创业孵化基地和小微企业创业基地等创新创业教育实践平台数</td>
-                                            <td class="col-sm-1"><input type="text" class="form-control"></td>
-                                            <td class="col-sm-5">
-                                                <span class="label label-warning">文件未上传</span> 上传:<input style="float:right" type="file" name="file-for-hashname">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button type="button" class="btn btn-info">保存</button>
-                                <button type="button" class="btn btn-success">确认无误，提交</button>
-                                </form>
+                                {% include "school/school_question_form.html" %}
                             </div>
                         </div>
                     </div>

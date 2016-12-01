@@ -1,0 +1,26 @@
+<form action="#" method="POST" id="school_sheet">
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            {% for a_item in a_items %}
+            <tr>
+                <td class="col-sm-1">{{a_item.question_item.index}}</td>
+                <td class="col-sm-5">{{a_item.question_item.text}}</td>
+                {% if a_item.question_item.boolean_input %}
+                    <td class="col-sm-1"><input type="checkbox" name="val-for-hashname" {% if a_item.value %}checked="checked>"{%endif%}></td>
+                {% else %}
+                    <td class="col-sm-1"><input type="text" class="form-control" {% if a_item.value %}value={{a_item.value}} {%endif%}></td>
+                {% endif %}
+                <td class="col-sm-5">
+                {% if a_item.path %}
+                    <span class="label label-success">文件已上传</span> 覆盖:<input style="float:right" type="file" name="file-for-hashname">
+                {% else %}
+                    <span class="label label-warning">文件未上传</span> 上传:<input style="float:right" type="file" name="file-for-hashname">
+                {% endif %}
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-info">保存</button>
+    <button type="button" class="btn btn-success">确认无误，提交</button>
+</form>
