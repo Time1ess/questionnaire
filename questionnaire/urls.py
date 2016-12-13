@@ -24,8 +24,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from authentication import views as auth_views
 
 urlpatterns = [
+    url(r'^$', auth_views.login_view, name='authentication.login'),
     url(r'^admin/', admin.site.urls),
     url(r'^school/', include('school.urls')),
     url(r'^auth/', include('authentication.urls')),
