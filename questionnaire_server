@@ -1,0 +1,44 @@
+server {
+	listen   8900; ## listen for ipv4; this line is default and implied
+	listen   [::]:8900 default ipv6only=on; ## listen for ipv6
+
+        #root /home/sie/mysites/schoolManagement;
+        root /home/mxl/mysite/questionnaire;
+
+	server_name 192.168.2.80;
+    client_max_body_size 120m;
+    client_body_temp_path /home/mxl/mysite/tmp;
+
+	location / {
+        root /home/mxl/mysite/questionnaire;
+        uwsgi_pass 192.168.2.80:8888;
+        include uwsgi_params;
+        access_log off;
+	}
+
+	location /doc/ {
+		alias /usr/share/doc/;
+		autoindex on;
+		allow 127.0.0.1;
+		deny all;
+	}
+
+    location /static {
+       alias /home/mxl/mysite/questionnaire/static/;
+       access_log off;
+    }
+
+
+    location ~.*\.(gif|jpg|png|ico|jpeg|bmp|swf|doc|docx)$ {
+       expires 3d;
+    }
+
+    location /media {
+        root  /home/mxl/mysite/questionnaire/;
+        break;
+    }
+
+    location ~.*\.(css|js)$ {
+       expires 12h;
+    }
+}
