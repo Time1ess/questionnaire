@@ -43,7 +43,8 @@ def save_answers(request):
                     os.makedirs(path)
                 except OSError:
                     pass
-                path = os.path.join(path, ans_id+ext)
+                #path = os.path.join(path, ans_id+ext)
+                path = os.path.join(path, val.name)
                 try:
                     with open(path, 'wb') as f:
                         f.write(val.read())

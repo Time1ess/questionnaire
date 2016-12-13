@@ -6,6 +6,7 @@
 # Last modified: 2016-11-29 19:04
 # Filename: views.py
 # Description:
+import os
 
 from collections import defaultdict
 from django.shortcuts import render
@@ -42,6 +43,8 @@ def question_table_view(request):
     a_items = a_sheet.answeritem_set.all().select_related('question_item')
     a_items = a_items.order_by('question_item__index')
     finished = a_sheet.finished
+    for a_item in a_items:
+        a_item.filename = os.path.basename(a_item.path)
 
     context['q_sheet'] = q_sheet
     context['a_sheet'] = a_sheet
@@ -60,7 +63,7 @@ def question_table_view(request):
         ans_items = a_sheet_school.answeritem_set.all()
         for item in ans_items:
             vals_sum[item.question_item] += int(item.value)
-    school_data = vals_sum.items().sort(key=lambda x: x[0].index)
+    school_data = sorted(vals_sum.items(), key=lambda x: x[0].index)
 
     context['school_data'] = school_data
     return render(request, 'manager/question_table.html', context)

@@ -10,22 +10,22 @@
             <tr>
                 <td class="col-sm-1">{{item.question_item.index}}</td>
                 <td class="col-sm-5">{{item.question_item.text}}</td>
-                <td class="col-sm-3">
+                <td class="col-sm-1">
                     {% if finished %}
                     {{item.value}}
                     {% else %}
                     {% if item.question_item.boolean_input %}
-                    <input type="checkbox" item_id="{{item.id}}" class="form-control" {% if item.value  == '1' %}checked="checked"{% endif %}>
+                    <input type="checkbox" item_id="{{item.id}}" class="" {% if item.value  == '1' %}checked="checked"{% endif %}>
                     <input type="hidden" id="answer_{{item.id}}" name="answer_{{item.id}}" value="1">
                     {% else %}
                     <input type="text" class="form-control" name="answer_{{item.id}}" value="{{item.value}}">
                     {% endif %}
                     {% endif %}
                 </td>
-                <td class="col-sm-3">
+                <td class="col-sm-5">
                     {% if item.path %}
                     <div id="status_{{item.id}}" class="input-group has-success">
-                        <div class="input-group-addon">覆盖已上传文件:</div>
+                        <div class="input-group-addon">{{item.filename}}</div>
                     {% else %}
                     <div id="status_{{item.id}}" class="input-group has-warning">
                         <div class="input-group-addon">上传文件:</div>

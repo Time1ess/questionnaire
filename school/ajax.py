@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import os
+import json
 
 from django.http import HttpResponse
 from django.conf import settings
@@ -16,11 +17,17 @@ def answer_save(request):
     if request.method == "POST":
         data = list(request.POST.dict().iteritems())
         answers = filter(lambda (k,v):(k.startswith('answer_'), v), data)
+        #answers = []
+        #for (k,v) in data:
+        #    if k.startswith('answer_'):
+        #        print k
+        #        answers.append((k,v))
         file_data = list(request.FILES.dict().iteritems())
         files = filter(lambda (k,v):(k.startswith('file_'), v), file_data)
         media_dir = settings.MEDIA_DIR
+        #answer_response = []
+        #file_response = []
         response = []
-        print answers
         for item, value in answers:
             item_id = item.replace('answer_', '')
             try:
@@ -31,10 +38,10 @@ def answer_save(request):
             if answer_item:
                 answer_item.value = value
                 answer_item.save()
-                response.append(item_id)
+                #answer_response.append(item_id)
 
         for item, value in files:
-            print item
+            print "item:%s" % item
             item_id = item.replace('file_', '')
             try:
                 answer_item = AnswerItem.objects.get(id=item_id)
@@ -48,18 +55,23 @@ def answer_save(request):
                     os.makedirs(file_path)
                 except OSError:
                     pass
-                file_path = os.path.join(file_path, item_id+file_ext)
+                file_path = os.path.join(file_path, value.name)
 
                 try:
                     with open(file_path, 'wb') as f:
                         f.write(value.read())
                     answer_item.path = file_path
                     answer_item.save()
+                    #file_response.append(item_id)
                     response.append(item_id)
                 except IOError,e:
                     print e
                     pass
-            
+        #ret = {
+        #    "answer": answer_response,
+        #    "file": file_response
+        #}
+        #return HttpResponse(json.dumps(ret))
         if response:
             return HttpResponse(','.join(response))
         else:

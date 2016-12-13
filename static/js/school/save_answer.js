@@ -25,7 +25,7 @@ function answer_callback(id_list) {
     for (id in ids) {
 
     }*/
-   alert(id_list);
+   alert("保存成功");
 }
 
 
@@ -33,8 +33,10 @@ $(".file_upload").on('change', function(){
     save('file')
 });
 
-function file_callback(id_list) {
-    ids = id_list.split(",");
+function file_callback(data) {
+    //j_data = JSON.parse(data);
+    //ids = j_data.file;
+    ids = data.split(',');
     for (idx in ids) {
         id = ids[idx]
         file_div = "#status_" + id;

@@ -6,6 +6,7 @@
 # Last modified: 2016-11-27 18:09
 # Filename: views.py
 # Description:
+import os
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -26,6 +27,8 @@ def question_table_view(request):
                                         answer_sheet=a_sheet)
 
     a_items = a_sheet.answeritem_set.all().select_related('question_item').order_by('question_item__index')
+    for a_item in a_items:
+        a_item.filename = os.path.basename(a_item.path)
 
     context = {
         "a_items": a_items,

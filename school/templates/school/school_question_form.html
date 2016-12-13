@@ -17,7 +17,7 @@
                 <td class="col-sm-5">
                 {% if item.path %}
                     <div id="status_{{item.id}}" class="input-group has-success">
-                        <div class="input-group-addon">覆盖已上传文件:</div>
+                        <div class="input-group-addon">{{item.filename}}</div>
                 {% else %}
                     <div id="status_{{item.id}}" class="input-group has-warning">
                         <div class="input-group-addon">上传文件:</div>

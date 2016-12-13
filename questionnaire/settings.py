@@ -34,7 +34,7 @@ SECRET_KEY = '4p%e^di2iur*fnu%(=k*qo#@+pvxvcd7(2lhiwf$1xiz7!_aow'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.2.80', 'localhost']
 
 
 # Application definition
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'manager',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': 'questiontest',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '192.168.1.124',
+        'HOST': '192.168.2.81',
         'PORT': 3306
     }
 }
@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'zh-CN'
+LANGUAGE_CODE = 'en-US'
 
 TIME_ZONE = 'Asia/Shanghai'
 
