@@ -13,7 +13,7 @@ function save_answer(type)
         alert("保存类型错误!");
         return
     }
-    var form_data = new FormData($('#answer_sheet')[0]);
+    /*var form_data = new FormData($('#answer_sheet')[0]);
     $.ajax({
         type: 'POST',
         url: '/manager/save_answers',
@@ -22,7 +22,14 @@ function save_answer(type)
         processData: false,
         cache: false,
         contentType: false,
-    });
+    });*/
+    $("#answer_sheet").ajaxSubmit({
+        url: '/manager/save_answers',
+        type: 'POST',
+        clearForm: false,
+        resetForm: false,
+        success: callback
+    })
 }
 
 function callback_file(id_list)

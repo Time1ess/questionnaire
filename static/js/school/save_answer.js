@@ -3,7 +3,8 @@ function save(type) {
     else if (type == 'file') save_callback=file_callback;
     else return;
 
-    form_data = new FormData($("#school_sheet")[0]);
+    //form_data = new FormData($("#school_sheet")[0]);
+    /*form_data = $("#school_sheet").serialize();
     
     $.ajax({
         type: 'POST',
@@ -13,7 +14,14 @@ function save(type) {
         processData: false,
         cache: false,
         contentType: false
-    });
+    });*/
+    $("#school_sheet").ajaxSubmit({
+        url: '/school/answer_save',
+        type: 'POST',
+        clearForm: false,
+        resetForm: false,
+        success: save_callback
+    })
 }
 
 $(".save_answer").click(function(){
@@ -68,7 +76,7 @@ function confirm_answer() {
         type: 'POST',
         url: '/school/answer_confirm',
         data: {'sheet_id':sheet_id},
-        success: reload,
+        success: reload
     });
 }
 
