@@ -62,7 +62,7 @@ def question_table_view(request):
                                                  question_sheet=q_sheet_school)
         ans_items = a_sheet_school.answeritem_set.all()
         for item in ans_items:
-            vals_sum[item.question_item] += int(item.value)
+            vals_sum[item.question_item] += int(item.value) if item.value else 0
     school_data = sorted(vals_sum.items(), key=lambda x: x[0].index)
 
     context['school_data'] = school_data
